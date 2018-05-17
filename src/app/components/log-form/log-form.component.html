@@ -1,9 +1,12 @@
 <div class="card card-body mb-3">
   <form>
     <div class="form-group">
-      <input type="text" placeholder="Add a log..." class="form-control">
+      <input type="text" [(ngModel)]="log.text" placeholder="Add a log..." name="logText" class="form-control">
     </div>
-    <input type="submit" value="Add Log" class="btn btn-light" [disabled]="!this.text">
-    <button type="button" class="btn btn-warning" [hidden]="!this.text">Clear</button>
+    <input type="button" *ngIf="isNew; else updateLogBtn" value="Add Log" (click)="addLog()" class="btn btn-dark" [disabled]="!this.log.text">
+    <ng-template  #updateLogBtn >
+    <input type="button" value="Update Log" class="btn btn-primary" (click)="updateLog()" >      
+    </ng-template>
+    <button type="button" class="btn btn-warning" (click)="clearState()" [hidden]="!this.log.text">Clear</button>
   </form>
 </div>
