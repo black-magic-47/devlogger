@@ -1,6 +1,6 @@
 <ul class="list-group" *ngIf="loaded && this.logs.length > 0">
-  <li *ngFor="let log of logs" class="list-group-item d-flex justify-content-between align-items-center" [class.list-group-item-secondary]="selectedLog === log">
-    <a (click)="selectLog(log)" href="#">{{log.text}}</a>
+  <li *ngFor="let log of logs" class="list-group-item d-flex justify-content-between align-items-center" (click)="selectLog(log)" [class.list-group-item-secondary]="selectedLog === log">
+    <a href="#">{{log.text}}</a>
     <span class="log-date">{{log.date | date: 'short'}}</span>
     <i class="fa fa-remove" (click)="deleteLog(log)"></i>
   </li>
