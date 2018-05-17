@@ -16,11 +16,17 @@ export class LogService {
   constructor() { }
 
   getLogs = (): Observable<Log[]> => {
+    if (localStorage.getItem('app-devlogger-logs') != null) {
+      this.logs = JSON.parse(localStorage.getItem('app-devlogger-logs'));
+    } else {
+      this.logs = [];
+    }
     return Observable.of(this.logs);
   }
 
   add = (log: Log) => {
     this.logs.unshift(log);
+    localStorage.setItem('app-devlogger-logs', JSON.stringify(this.logs));
   }
 
   update = (log: Log) => {
@@ -30,6 +36,7 @@ export class LogService {
       }
     });
     this.logs.unshift(log);
+    localStorage.setItem('app-devlogger-logs', JSON.stringify(this.logs));
   }
 
   delete = (log: Log) => {
